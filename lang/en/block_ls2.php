@@ -17,9 +17,9 @@
  * block plugin "LS2" - Version file
  *
  * @package    block_ls2
- * @copyright  2025 https://teameo.io
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2025 LS2 Innovation https://ls2.io
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  */
-$string['pluginname'] = 'Bloc LS2';
-$string['digital_space_title'] = 'Espace Numérique';
-$string['block_title'] = 'Espace Classe';
+$string['pluginname'] = 'LS2 Block';
+$string['digital_space_title'] = 'Digital Space';
+$string['block_title'] = 'Class Space';

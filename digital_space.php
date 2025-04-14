@@ -18,8 +18,8 @@
  * Plugin functions.
  *
  * @package    block_ls2
- * @copyright  2025 https://teameo.io
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2025 LS2 Innovation https://ls2.io
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  */
 
 namespace block_ls2;
