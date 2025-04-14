@@ -17,9 +17,15 @@
 /**
  * Plugin functions.
  *
- * @package    block_ls2
- * @copyright  2025 LS2 Innovation https://ls2.io
- * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
+ */
+
+/**
+ * Digital space page.
+ *
  */
 
 namespace block_ls2;
@@ -46,8 +52,8 @@ $title = get_string('digital_space_title', 'block_ls2');
 $PAGE->set_title($title);
 
 $baseurl = block_ls2_get_base_url();
-$context_query = get_context_query();
-$iframesrc = "$baseurl/digitalSpaces/my?hostApp=Moodle&moodleContext=$context_query";
+$contextquery = get_context_query();
+$iframesrc = "$baseurl/digitalSpaces/my?hostApp=Moodle&moodleContext=$contextquery";
 $html = '<iframe src="' . $iframesrc
     . '" style="overflow:hidden;height: calc(100vh - 100px);width:100%" width="100%" frameborder="0"></iframe>';
 
@@ -72,6 +78,7 @@ echo $html;
     if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
         location.reload();
     }
+
     window.onmessage = function (e) {
         if (e.origin !== <?php echo $baseurl ?>) {
             return;
@@ -83,4 +90,18 @@ echo $html;
     }
 </script>
 <?php
+/**
+ * Plugin functions.
+ *
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
+ */
+
+/**
+ * Digital space page.
+ *
+ */
+
 echo $OUTPUT->footer();

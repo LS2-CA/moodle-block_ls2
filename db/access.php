@@ -17,10 +17,13 @@
 /**
  * Plugin capabilities for the block_ls2 plugin.
  *
- * @package    block_ls2
- * @copyright  2025 LS2 Innovation https://ls2.io
- * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
  */
+
+ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
     'block/ls2:addinstance' => [
@@ -29,8 +32,8 @@ $capabilities = [
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => [
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
         ],
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
     ],
 ];

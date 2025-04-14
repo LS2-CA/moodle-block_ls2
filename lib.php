@@ -17,24 +17,24 @@
 /**
  * Plugin functions.
  *
- * @package    block_ls2
- * @copyright  2025 LS2 Innovation https://ls2.io
- * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
  */
-
 
  /**
- * get base url
- *
- * @return string base url
- */
+  * get base url
+  *
+  * @return string base url
+  */
 function block_ls2_get_base_url() {
     global $CFG;
 
-    if($CFG->wwwroot == "http://localhost/moodle"){
+    if ($CFG->wwwroot == "http://localhost/moodle") {
         return "https://localhost:44305";
     }
-    if($CFG->wwwroot == "https://moodle.teameo.io"){
+    if ($CFG->wwwroot == "https://moodle.teameo.io") {
         return "https://dev-app.teameo.io";
     }
     return "https://app.teameo.io";
@@ -46,7 +46,7 @@ function block_ls2_get_base_url() {
  * @return string navbar output
  */
 function block_ls2_render_navbar_output() {
-    global $PAGE ,$CFG;
+    global $PAGE, $CFG;
     if (!isloggedin()) {
         return '';
     }
@@ -56,10 +56,10 @@ function block_ls2_render_navbar_output() {
 
     $baseurl = block_ls2_get_base_url();
     $iconurl = $baseurl . '/api/config/DigitalSpace/Moodle/Plugin/Icon' . '?siteUrl=' . urlencode($CFG->wwwroot);
-    
+
     $currenturl = $PAGE->url->out();
     $style = "";
-    if($currenturl == $pageurl->out()){
+    if ($currenturl == $pageurl->out()) {
         $style = "border-bottom: 3px solid #0f6cbf;";
     }
 
@@ -68,7 +68,7 @@ function block_ls2_render_navbar_output() {
 }
 
 /**
- * 
+ *
  * get the context query for the current user.
  * @param stdClass $course The current course.
  * @return string The urlencoded context query.
@@ -76,18 +76,18 @@ function block_ls2_render_navbar_output() {
 function get_context_query($course = null) {
     global $CFG, $USER;
 
-    $ctx = array(
+    $ctx = [
         'siteUrl' => $CFG->wwwroot,
         'userName' => $USER->username,
         'userEmail' => $USER->email,
-        'userId' => (int) $USER->id
-    );
+        'userId' => (int) $USER->id,
+    ];
 
     if (isset($course)) {
         $ctx['courseId'] = (int) $course->id;
         $ctx['courseFullname'] = $course->fullname;
         $ctx['courseShortname'] = $course->shortname;
-        
+
         $context = context_course::instance($course->id);
         $ctx['isCourseOwner'] = has_capability('moodle/course:update', $context, $USER->id);
     }
@@ -96,4 +96,3 @@ function get_context_query($course = null) {
 
     return urlencode($json);
 }
-

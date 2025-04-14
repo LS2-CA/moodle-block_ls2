@@ -13,12 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * block plugin "LS2" - Version file
  *
- * @package    block_ls2
- * @copyright  2025 LS2 Innovation https://ls2.io
- * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
  */
 $string['pluginname'] = 'LS2 Block';
 $string['digital_space_title'] = 'Digital Space';
