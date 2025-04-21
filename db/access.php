@@ -23,7 +23,7 @@
  * @link      https://ls2.io
  */
 
- defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
     'block/ls2:addinstance' => [
@@ -35,5 +35,13 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
         'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+    'block/ls2:myaddinstance' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'user' => CAP_ALLOW,
+        ],
+        'clonepermissionsfrom' => 'moodle/my:manageblocks',
     ],
 ];

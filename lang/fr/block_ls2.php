@@ -25,3 +25,6 @@
 $string['pluginname'] = 'Bloc LS2';
 $string['digital_space_title'] = 'Espace Numérique';
 $string['block_title'] = 'Espace Classe';
+$string['ls2:addinstance'] = 'Ajouter un nouveau bloc LS2';
+$string['ls2:myaddinstance'] = 'Ajouter un nouveau bloc LS2 au tableau de bord';
+$string['privacy:metadata'] = 'Le plugin LS2 Block ne stocke aucune donnée personnelle.';

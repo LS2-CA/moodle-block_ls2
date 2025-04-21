@@ -15,16 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * block plugin "LS2" - Version file
+ * Privacy provider.
  *
  * @package   block_ls2
  * @copyright 2025 ls2.io
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @link      https://ls2.io
  */
-$string['pluginname'] = 'LS2 Block';
-$string['digital_space_title'] = 'Digital Space';
-$string['block_title'] = 'Class Space';
-$string['ls2:addinstance'] = 'Add a new LS2 block';
-$string['ls2:myaddinstance'] = 'Add a new LS2 block to Dashboard';
-$string['privacy:metadata'] = 'The LS2 Block plugin does not store any personal data.';
+
+namespace block_ls2\privacy;
+
+/**
+ * Data provider for block_ls2.
+ *
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @link      https://ls2.io
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Explain why this plugin stores no personal data.
+     *
+     * @return string
+     */
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
+}
