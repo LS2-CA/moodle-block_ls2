@@ -2,6 +2,8 @@
 
 Welcome to the official GitHub repository for the [Teameo & Classeo Moodle Digital Space Plugin], a robust solution designed to enhance Moodle Class Copy. This plugin facilitates copying class content between classes.
 
+To function, this plugin requires your college or university to have an active subscription to [Teameo](https://teameo.io) or [Classeo](https://classeo.io).
+
 Explore more: 
 - **[Teameo.io](https://teameo.io)**
 - **[Classeo.io](https://classeo.io)**
