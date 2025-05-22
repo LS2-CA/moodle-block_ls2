@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_ls2';
-$plugin->version = 2025052200;
-$plugin->release = 'v0.1.1';
+$plugin->version = 2025052201;
+$plugin->release = 'v0.1.2';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->requires = 2020061500;
