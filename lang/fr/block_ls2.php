@@ -22,9 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @link      https://ls2.io
  */
-$string['block_title']        = 'Espace Classe';
+$string['block_title'] = 'Espace Classe';
 $string['digital_space_title'] = 'Espace Numérique';
-$string['ls2:addinstance']    = 'Ajouter un nouveau bloc LS2';
-$string['ls2:myaddinstance']  = 'Ajouter un nouveau bloc LS2 au tableau de bord';
-$string['pluginname']         = 'Bloc LS2';
-$string['privacy:metadata']   = 'Le plugin LS2 Block ne stocke aucune donnée personnelle.';
+$string['ls2:addinstance'] = 'Ajouter un nouveau bloc LS2';
+$string['ls2:myaddinstance'] = 'Ajouter un nouveau bloc LS2 au tableau de bord';
+$string['pluginname'] = 'Bloc LS2';
+$string['privacy:metadata'] = 'Le plugin LS2 Block ne stocke aucune donnée personnelle.';
