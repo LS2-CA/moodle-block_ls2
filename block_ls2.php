@@ -55,7 +55,7 @@ class block_ls2 extends block_base {
 
         $baseurl = block_ls2_get_base_url();
 
-        $contextquery = get_context_query($this->page->course);
+        $contextquery = block_ls2_get_context_query($this->page->course);
 
         $iframesrc = "$baseurl/moodle/courseBlock?hostApp=Moodle&moodleContext=$contextquery";
 

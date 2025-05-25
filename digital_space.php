@@ -52,7 +52,7 @@ $title = get_string('digital_space_title', 'block_ls2');
 $PAGE->set_title($title);
 
 $baseurl = block_ls2_get_base_url();
-$contextquery = get_context_query();
+$contextquery = block_ls2_get_context_query();
 $iframesrc = "$baseurl/digitalSpaces/my?hostApp=Moodle&moodleContext=$contextquery";
 $html = '<iframe src="' . $iframesrc
     . '" style="overflow:hidden;height: calc(100vh - 100px);width:100%" width="100%" frameborder="0"></iframe>';

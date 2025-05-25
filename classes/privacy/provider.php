@@ -25,6 +25,8 @@
 
 namespace block_ls2\privacy;
 
+use core_privacy\local\metadata\collection;
+
 /**
  * Data provider for block_ls2.
  *
@@ -33,13 +35,20 @@ namespace block_ls2\privacy;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @link      https://ls2.io
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\subsystem_provider {
     /**
-     * Explain why this plugin stores no personal data.
+     * Returns metadata about this plugin's privacy policy.
      *
-     * @return string
+     * @param collection $collection The initialized collection to add items to.
+     * @return collection A listing of user data handled by this plugin.
      */
-    public static function get_reason(): string {
-        return 'privacy:metadata';
+    public static function get_metadata(collection $collection): collection {
+        $collection->add_external_location_link('external_service', [
+            'userid' => 'privacy:metadata:external_service:userid',
+            'username' => 'privacy:metadata:external_service:username',
+            'email' => 'privacy:metadata:external_service:email',
+        ], 'privacy:metadata:external_service');
+
+        return $collection;
     }
 }

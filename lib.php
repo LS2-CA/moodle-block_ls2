@@ -73,7 +73,7 @@ function block_ls2_render_navbar_output() {
  * @param stdClass $course The current course.
  * @return string The urlencoded context query.
  */
-function get_context_query($course = null) {
+function block_ls2_get_context_query($course = null) {
     global $CFG, $USER;
 
     $ctx = [
