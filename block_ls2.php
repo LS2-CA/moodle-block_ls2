@@ -60,7 +60,7 @@ class block_ls2 extends block_base {
         $iframesrc = "$baseurl/moodle/courseBlock?hostApp=Moodle&moodleContext=$contextquery";
 
         $html = '<iframe src="' . $iframesrc
-            . '" style="overflow:hidden;height: 300px;width:100%" width="100%" frameborder="0"></iframe>';
+            . '" allow="clipboard-write; fullscreen;" allowfullscreen="true" style="overflow:hidden;height: 300px;width:100%" width="100%" frameborder="0"></iframe>';
 
         $this->content->text = $html;
 

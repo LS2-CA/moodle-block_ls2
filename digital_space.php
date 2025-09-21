@@ -55,7 +55,7 @@ $baseurl = block_ls2_get_base_url();
 $contextquery = block_ls2_get_context_query();
 $iframesrc = "$baseurl/digitalSpaces/my?hostApp=Moodle&moodleContext=$contextquery";
 $html = '<iframe src="' . $iframesrc
-    . '" style="overflow:hidden;height: calc(100vh - 100px);width:100%" width="100%" frameborder="0"></iframe>';
+    . '" allow="clipboard-write; fullscreen;" allowfullscreen="true" style="overflow:hidden;height: calc(100vh - 100px);width:100%" width="100%" frameborder="0"></iframe>';
 
 echo $OUTPUT->header();
 echo $html;
@@ -80,7 +80,7 @@ echo $html;
     }
 
     window.onmessage = function (e) {
-        if (e.origin !== <?php echo $baseurl ?>) {
+        if (e.origin !== "<?php echo $baseurl ?>") {
             return;
         }
 
