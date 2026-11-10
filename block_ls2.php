@@ -81,6 +81,7 @@ class block_ls2 extends block_base {
         ]);
         $this->content->footer = html_writer::div($fullpage . ' ' . $fullscreen, 'block_ls2-actions');
 
+        block_ls2_require_colour_scheme_js($this->page);
         $this->page->requires->js_amd_inline(<<<JS
             var button = document.querySelector('button.block_ls2-fullscreen[data-target="{$frameid}"]');
             var frame = document.getElementById('{$frameid}');

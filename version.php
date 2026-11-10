@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_ls2';
-$plugin->version = 2026111000;
+$plugin->version = 2026111001;
 $plugin->release = 'v0.2.0';
 $plugin->maturity = MATURITY_STABLE;
 // Moodle 4.5 (LTS) is the oldest release still supported upstream.

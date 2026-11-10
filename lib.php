@@ -97,8 +97,66 @@ function block_ls2_get_context(?stdClass $course = null): array {
 function block_ls2_get_app_url(string $path, ?stdClass $course = null): moodle_url {
     return new moodle_url(block_ls2_get_base_url() . $path, [
         'hostApp' => 'Moodle',
+        'colorScheme' => block_ls2_get_colour_scheme(),
         'moodleContext' => json_encode(block_ls2_get_context($course)),
     ]);
+}
+
+/**
+ * Returns the colour scheme the LS2 application should use: light, dark or auto (follow the device).
+ *
+ * By default it follows Moodle: the Boost colour mode where the site supports it (Moodle 6.0+),
+ * light otherwise, as Boost has no dark mode before 6.0. Admins can force a value, e.g. for a dark theme.
+ *
+ * @return string
+ */
+function block_ls2_get_colour_scheme(): string {
+    $setting = get_config('block_ls2', 'colourscheme');
+    if (in_array($setting, ['light', 'dark', 'auto'], true)) {
+        return $setting;
+    }
+
+    if (class_exists('\theme_boost\colour_mode') && \theme_boost\colour_mode::is_boost_theme()) {
+        $mode = \theme_boost\colour_mode::get_current_mode();
+        if (in_array($mode, ['light', 'dark', 'auto'], true)) {
+            return $mode;
+        }
+    }
+
+    return 'light';
+}
+
+/**
+ * Keeps the colour scheme of the embedded LS2 application in sync when the Moodle colour mode changes without
+ * a page reload (Moodle 6.0+), by posting {type: 'colorScheme', value: 'light'|'dark'} to each LS2 iframe.
+ *
+ * @param moodle_page $page
+ * @return void
+ */
+function block_ls2_require_colour_scheme_js(moodle_page $page): void {
+    if (get_config('block_ls2', 'colourscheme') && get_config('block_ls2', 'colourscheme') !== 'moodle') {
+        return;
+    }
+    $origin = json_encode(block_ls2_get_origin());
+    $page->requires->js_amd_inline(<<<JS
+        if (!window.blockLs2ColourScheme) {
+            window.blockLs2ColourScheme = true;
+            var root = document.documentElement;
+            var current = root.getAttribute('data-bs-theme');
+            new MutationObserver(function() {
+                var mode = root.getAttribute('data-bs-theme');
+                if (mode === current || (mode !== 'light' && mode !== 'dark')) {
+                    return;
+                }
+                current = mode;
+                document.querySelectorAll('iframe.block_ls2-iframe').forEach(function(frame) {
+                    if (frame.contentWindow) {
+                        frame.contentWindow.postMessage({type: 'colorScheme', value: mode}, {$origin});
+                    }
+                });
+            }).observe(root, {attributes: true, attributeFilter: ['data-bs-theme']});
+        }
+    JS);
 }
 
 /**
@@ -131,6 +189,7 @@ function block_ls2_render_iframe(moodle_url $src, string $title, string $class =
  * @return void
  */
 function block_ls2_require_page_js(moodle_page $page): void {
+    block_ls2_require_colour_scheme_js($page);
     $origin = json_encode(block_ls2_get_origin());
     $page->requires->js_amd_inline(<<<JS
         var nav = window.performance && performance.getEntriesByType
@@ -147,7 +206,7 @@ function block_ls2_require_page_js(moodle_page $page): void {
         var fit = function() {
             if (frame) {
                 var top = frame.getBoundingClientRect().top + window.scrollY;
-                frame.style.height = Math.max(400, window.innerHeight - top - 16) + 'px';
+                frame.style.height = Math.max(400, window.innerHeight - top) + 'px';
             }
         };
         fit();

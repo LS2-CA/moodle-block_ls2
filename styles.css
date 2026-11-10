@@ -1,6 +1,6 @@
 /* Block: the embedded Class Space. */
 .block_ls2 .block_ls2-frame {
-    background: #fff;
+    background: var(--bs-body-bg, #fff);
 }
 
 .block_ls2 .block_ls2-iframe {
@@ -27,9 +27,32 @@ body.block_ls2-fullpage #page-header {
     display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
-body.block_ls2-fullpage #topofscroll {
+/* Remove the Boost gutters around the main region so the iframe uses all the available space. */
+body.block_ls2-fullpage #page.drawers {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body.block_ls2-fullpage #page.drawers #topofscroll {
     margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+    padding: 0;
     max-width: none;
+}
+
+body.block_ls2-fullpage #page-content {
+    padding-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+body.block_ls2-fullpage #region-main {
+    margin-top: 0;
+}
+
+body.block_ls2-fullpage #page.drawers #region-main > [role="main"] {
+    padding: 0;
+}
+
+body.block_ls2-fullpage .secondary-navigation {
+    padding: 0 1rem;
 }
 
 body.block_ls2-fullpage .primary-navigation .nav-link.active {
@@ -39,8 +62,8 @@ body.block_ls2-fullpage .primary-navigation .nav-link.active {
 body.block_ls2-fullpage .block_ls2-iframe {
     display: block;
     width: 100%;
-    height: calc(100vh - var(--navbar-height, 60px) - 40px);
-    height: calc(100dvh - var(--navbar-height, 60px) - 40px); /* stylelint-disable-line declaration-block-no-duplicate-properties */
+    height: calc(100vh - var(--navbar-height, 60px));
+    height: calc(100dvh - var(--navbar-height, 60px)); /* stylelint-disable-line declaration-block-no-duplicate-properties */
     border: 0;
 }
 
