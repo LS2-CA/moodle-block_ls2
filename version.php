@@ -26,7 +26,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_ls2';
-$plugin->version = 2025092100;
-$plugin->release = 'v0.1.4';
+$plugin->version = 2026111000;
+$plugin->release = 'v0.2.0';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->requires = 2020061500;
+// Moodle 4.5 (LTS) is the oldest release still supported upstream.
+$plugin->requires = 2024100700;
+// Tested branches: 4.5 LTS, 5.0, 5.1, 5.2 and 5.3 LTS. Raise the upper bound once 6.0 is validated.
+$plugin->supported = [405, 503];

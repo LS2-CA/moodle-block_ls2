@@ -15,19 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * block plugin "LS2" - Version file
+ * Language strings for block_ls2
  *
  * @package   block_ls2
  * @copyright 2025 ls2.io
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @link      https://ls2.io
  */
+
+defined('MOODLE_INTERNAL') || die();
+
+$string['baseurl'] = 'LS2 application URL';
+$string['baseurl_desc'] = 'Leave empty to use the default LS2 application (https://app.teameo.io). Only change this if LS2 asked you to.';
 $string['block_title'] = 'Class Space';
 $string['digital_space_title'] = 'Digital Space';
+$string['fullscreen'] = 'Full screen';
 $string['ls2:addinstance'] = 'Add a new LS2 block';
 $string['ls2:myaddinstance'] = 'Add a new LS2 block to Dashboard';
+$string['openfullpage'] = 'Open in full page';
 $string['pluginname'] = 'LS2 Block';
 $string['privacy:metadata:external_service'] = 'The LS2 block sends user data to the LS2 app for Single Sign-On (SSO) purposes.';
+$string['privacy:metadata:external_service:courseid'] = 'The ID of the course the user is viewing.';
+$string['privacy:metadata:external_service:email'] = 'The email address of the Moodle user.';
+$string['privacy:metadata:external_service:iscourseowner'] = 'Whether the user can edit the course.';
 $string['privacy:metadata:external_service:userid'] = 'The user ID of the Moodle user.';
 $string['privacy:metadata:external_service:username'] = 'The username of the Moodle user.';
-$string['privacy:metadata:external_service:email'] = 'The email address of the Moodle user.';

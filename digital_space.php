@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin functions.
+ * Digital Space page.
  *
  * @package   block_ls2
  * @copyright 2025 ls2.io
@@ -23,85 +23,28 @@
  * @link      https://ls2.io
  */
 
-/**
- * Digital space page.
- *
- */
-
-namespace block_ls2;
-
-require_once('../../config.php');
-require_login();
+require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/blocks/ls2/lib.php');
-require_once($CFG->dirroot . '/user/lib.php');
-require_once($CFG->dirroot . '/user/editlib.php');
-require_once($CFG->dirroot . '/lib/weblib.php');
-require_once($CFG->dirroot . '/lib/adminlib.php');
-require_once($CFG->dirroot . '/lib/externallib.php');
-require_once($CFG->dirroot . '/webservice/lib.php');
-global $SITE;
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 
-$context = \context_system::instance();
-$PAGE->set_context($context);
-$pageurl = new \moodle_url('/blocks/ls2/digital_space.php');
-$PAGE->set_url($pageurl);
-$PAGE->set_pagelayout('mydashboard');
+require_login(null, false);
+if (isguestuser()) {
+    throw new moodle_exception('noguest');
+}
 
 $title = get_string('digital_space_title', 'block_ls2');
-$PAGE->set_title($title);
 
-$baseurl = block_ls2_get_base_url();
-$contextquery = block_ls2_get_context_query();
-$iframesrc = "$baseurl/digitalSpaces/my?hostApp=Moodle&moodleContext=$contextquery";
-$html = '<iframe src="' . $iframesrc
-    . '" allow="clipboard-write; fullscreen;" allowfullscreen="true" style="overflow:hidden;height: calc(100vh - 100px);width:100%" width="100%" frameborder="0"></iframe>';
+$PAGE->set_context(context_system::instance());
+$PAGE->set_url(new moodle_url('/blocks/ls2/digital_space.php'));
+$PAGE->set_pagelayout('mydashboard');
+$PAGE->set_cacheable(false);
+$PAGE->set_title($title);
+$PAGE->add_body_class('block_ls2-fullpage');
+
+block_ls2_require_page_js($PAGE);
 
 echo $OUTPUT->header();
-echo $html;
-?>
-<style>
-    #page-header {
-        display: none !important;
-    }
-
-    #topofscroll {
-        margin: 0px !important;
-    }
-
-    .nav-link.active {
-        border-bottom: none !important;
-    }
-</style>
-
-<script>
-    if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
-        location.reload();
-    }
-
-    window.onmessage = function (e) {
-        if (e.origin !== "<?php echo $baseurl ?>") {
-            return;
-        }
-
-        if (e.data.type == "redirect") {
-            window.location.href = e.data.url;
-        }
-    }
-</script>
-<?php
-/**
- * Plugin functions.
- *
- * @package   block_ls2
- * @copyright 2025 ls2.io
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @link      https://ls2.io
- */
-
-/**
- * Digital space page.
- *
- */
-
+echo html_writer::div(
+    block_ls2_render_iframe(block_ls2_get_app_url('/digitalSpaces/my'), $title),
+    'block_ls2-page'
+);
 echo $OUTPUT->footer();
