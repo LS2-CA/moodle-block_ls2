@@ -67,6 +67,7 @@ function block_ls2_get_context(?stdClass $course = null): array {
         'userName' => $USER->username,
         'userEmail' => $USER->email,
         'userId' => (int) $USER->id,
+        'colorScheme' => block_ls2_get_colour_scheme(),
     ];
 
     if ($course !== null && !empty($course->id) && $course->id != SITEID) {
@@ -89,7 +90,6 @@ function block_ls2_get_context(?stdClass $course = null): array {
 function block_ls2_get_app_url(string $path, ?stdClass $course = null): moodle_url {
     return new moodle_url(block_ls2_get_base_url() . $path, [
         'hostApp' => 'Moodle',
-        'colorScheme' => block_ls2_get_colour_scheme(),
         'moodleContext' => json_encode(block_ls2_get_context($course)),
     ]);
 }
