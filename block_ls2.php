@@ -26,6 +26,9 @@
 /**
  * Block class for LS2.
  *
+ * @package   block_ls2
+ * @copyright 2025 ls2.io
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_ls2 extends block_base {
     /**
@@ -40,29 +43,57 @@ class block_ls2 extends block_base {
     /**
      * Gets the block contents.
      *
-     * @return string The block HTML.
+     * @return stdClass The block content.
      */
     public function get_content() {
-        global $OUTPUT, $CFG, $USER;
+        global $CFG;
 
         if ($this->content !== null) {
             return $this->content;
         }
 
         $this->content = new stdClass();
+        $this->content->text = '';
         $this->content->footer = '';
+
+        $course = $this->page->course;
+        if (!isloggedin() || isguestuser() || empty($course->id) || $course->id == SITEID) {
+            return $this->content;
+        }
+
         require_once($CFG->dirroot . '/blocks/ls2/lib.php');
 
-        $baseurl = block_ls2_get_base_url();
+        $title = get_string('block_title', 'block_ls2');
+        $frameid = html_writer::random_id('block_ls2-frame-');
 
-        $contextquery = block_ls2_get_context_query($this->page->course);
+        $iframe = block_ls2_render_iframe(block_ls2_get_app_url('/moodle/courseBlock', $course), $title);
+        $this->content->text = html_writer::div($iframe, 'block_ls2-frame', ['id' => $frameid]);
 
-        $iframesrc = "$baseurl/moodle/courseBlock?hostApp=Moodle&moodleContext=$contextquery";
+        $fullpage = html_writer::link(
+            new moodle_url('/blocks/ls2/view.php', ['id' => $course->id]),
+            get_string('openfullpage', 'block_ls2'),
+            ['class' => 'btn btn-sm btn-secondary']
+        );
+        $fullscreen = html_writer::tag('button', get_string('fullscreen', 'block_ls2'), [
+            'type' => 'button',
+            'class' => 'btn btn-sm btn-secondary block_ls2-fullscreen d-none',
+            'data-target' => $frameid,
+        ]);
+        $this->content->footer = html_writer::div($fullpage . ' ' . $fullscreen, 'block_ls2-actions');
 
-        $html = '<iframe src="' . $iframesrc
-            . '" allow="clipboard-write; fullscreen;" allowfullscreen="true" style="overflow:hidden;height: 300px;width:100%" width="100%" frameborder="0"></iframe>';
-
-        $this->content->text = $html;
+        block_ls2_require_colour_scheme_js($this->page);
+        $this->page->requires->js_amd_inline(<<<JS
+            var button = document.querySelector('button.block_ls2-fullscreen[data-target="{$frameid}"]');
+            var frame = document.getElementById('{$frameid}');
+            if (button && frame && document.fullscreenEnabled && frame.requestFullscreen) {
+                button.classList.remove('d-none');
+                button.addEventListener('click', function() {
+                    frame.requestFullscreen().catch(function() {
+                        return null;
+                    });
+                });
+            }
+        JS);
 
         return $this->content;
     }
@@ -80,5 +111,23 @@ class block_ls2 extends block_base {
             'mod' => true,
             'my' => false,
         ];
+    }
+
+    /**
+     * The block has a global settings page.
+     *
+     * @return bool
+     */
+    public function has_config() {
+        return true;
+    }
+
+    /**
+     * Only one instance per page makes sense.
+     *
+     * @return bool
+     */
+    public function instance_allow_multiple() {
+        return false;
     }
 }
