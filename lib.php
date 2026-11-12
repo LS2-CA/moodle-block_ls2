@@ -26,24 +26,16 @@
 /**
  * Returns the base URL of the LS2 application.
  *
- * An explicit admin setting wins; otherwise the URL is derived from the Moodle site.
+ * An explicit admin setting wins; otherwise the production LS2 application is used.
  *
  * @return string Base URL, without trailing slash.
  */
 function block_ls2_get_base_url(): string {
-    global $CFG;
-
     $configured = trim((string) get_config('block_ls2', 'baseurl'));
     if ($configured !== '') {
         return rtrim($configured, '/');
     }
 
-    if ($CFG->wwwroot == "http://localhost/moodle") {
-        return "https://localhost:44305";
-    }
-    if ($CFG->wwwroot == "https://moodle.teameo.io") {
-        return "https://dev-app.teameo.io";
-    }
     return "https://app.teameo.io";
 }
 
