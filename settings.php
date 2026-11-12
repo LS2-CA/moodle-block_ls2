@@ -33,16 +33,10 @@ if ($ADMIN->fulltree) {
         '',
         PARAM_URL
     ));
-    $settings->add(new admin_setting_configselect(
-        'block_ls2/colourscheme',
-        get_string('colourscheme', 'block_ls2'),
-        get_string('colourscheme_desc', 'block_ls2'),
-        'moodle',
-        [
-            'moodle' => get_string('colourscheme_moodle', 'block_ls2'),
-            'light' => get_string('colourscheme_light', 'block_ls2'),
-            'dark' => get_string('colourscheme_dark', 'block_ls2'),
-            'auto' => get_string('colourscheme_auto', 'block_ls2'),
-        ]
+    $settings->add(new admin_setting_configcheckbox(
+        'block_ls2/darktheme',
+        get_string('darktheme', 'block_ls2'),
+        get_string('darktheme_desc', 'block_ls2'),
+        0
     ));
 }

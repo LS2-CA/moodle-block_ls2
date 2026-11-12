@@ -98,14 +98,13 @@ function block_ls2_get_app_url(string $path, ?stdClass $course = null): moodle_u
  * Returns the colour scheme the LS2 application should use: light, dark or auto (follow the device).
  *
  * By default it follows Moodle: the Boost colour mode where the site supports it (Moodle 6.0+),
- * light otherwise, as Boost has no dark mode before 6.0. Admins can force a value, e.g. for a dark theme.
+ * Admins can declare that the site uses a dark theme.
  *
  * @return string
  */
 function block_ls2_get_colour_scheme(): string {
-    $setting = get_config('block_ls2', 'colourscheme');
-    if (in_array($setting, ['light', 'dark', 'auto'], true)) {
-        return $setting;
+    if (get_config('block_ls2', 'darktheme')) {
+        return 'dark';
     }
 
     if (class_exists('\theme_boost\colour_mode') && \theme_boost\colour_mode::is_boost_theme()) {
@@ -126,9 +125,6 @@ function block_ls2_get_colour_scheme(): string {
  * @return void
  */
 function block_ls2_require_colour_scheme_js(moodle_page $page): void {
-    if (get_config('block_ls2', 'colourscheme') && get_config('block_ls2', 'colourscheme') !== 'moodle') {
-        return;
-    }
     $origin = json_encode(block_ls2_get_origin());
     $page->requires->js_amd_inline(<<<JS
         if (!window.blockLs2ColourScheme) {

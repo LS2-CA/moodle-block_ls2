@@ -33,8 +33,8 @@ PHP 8.1+ (as required by each Moodle release). Moodle 5.1+ `public/` directory l
 - **Class Space block** on course and activity pages, with **Open in full page** (dedicated course page, no course index) and **Full screen** (browser fullscreen) buttons.
 - **Digital Space** link in the top navbar, opening a full-page view.
 - Full page views use the whole width and height below the Moodle navbar.
-- The LS2 application receives the Moodle colour mode as `colorScheme: light|dark|auto` in the `moodleContext` JSON on load, and `postMessage({type: 'colorScheme', value: 'light'|'dark'})` when the user switches mode without reloading (Moodle 6.0+). Before 6.0, Boost has no dark mode, so the value is `light`.
-- Admin settings (Site administration › Plugins › Blocks › LS2 Block): *LS2 application URL* (leave empty for the default) and *Colour scheme* (Follow Moodle, Light, Dark, Follow the device; use Dark for a dark third-party theme).
+Before 6.0, Boost has no dark mode, so the value is `light` unless the *Dark theme* setting is enabled.
+- *Dark theme* admin setting: enable it for a dark third-party theme; the LS2 application then receives `dark` on load. Otherwise, LS2 follows the Moodle colour mode.
 
 ---
 
